@@ -28,24 +28,26 @@ import com.google.gson.GsonBuilder;
 public class ACSReader {
 	private Gson gson;
 	private Match match;
-	private String season, region, gameId;
+	private String tournament, year, region, gameId;
 
-	public ACSReader(String url, String season, String region, String gameId)
+	public ACSReader(String url, String tournament, String year, String region, String gameId)
 			throws IOException, MalformedURLException {
 		Reader reader = new InputStreamReader(new URL(url).openStream());
 		gson = new GsonBuilder().create();
 		match = gson.fromJson(reader, Match.class);
-		this.season = season;
+		this.tournament = tournament;
+		this.year = year;
 		this.region = region;
 		this.gameId = gameId;
 
 	}
 
-	public ACSReader(FileReader fileReader, String season, String region, String gameId) {
+	public ACSReader(FileReader fileReader, String tournament, String year, String region, String gameId) {
 		Reader reader = fileReader;
 		gson = new GsonBuilder().create();
 		match = gson.fromJson(reader, Match.class);
-		this.season = season;
+		this.tournament = tournament;
+		this.year = year;
 		this.region = region;
 		this.gameId = gameId;
 
@@ -61,7 +63,7 @@ public class ACSReader {
 		for (Participant participant : match.getParticipants()) {
 			ImportedStats importedStats = participant.getStats();
 			Stats stats = StatsConstructor.constructPlayerStats(importedStats);
-			Player player = new Player(participant, season, region, gameId);
+			Player player = new Player(participant, tournament, year, region, gameId);
 			
 			Calculator calculator = new Calculator(new DKConversionMap(), stats);
 			player.setDkScore(calculator.calcluate());

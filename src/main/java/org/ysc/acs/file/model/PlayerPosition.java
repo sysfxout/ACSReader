@@ -3,33 +3,46 @@ package org.ysc.acs.file.model;
 import org.ysc.acs.mapping.PlayerPositionMap.Position;
 
 public class PlayerPosition {
-	private String season;
+	private String tournament;
+	private String year;
 	private String region;
 	private String name;
 	private String gameId;
 	private Position position;
 
-	public PlayerPosition(String name, String position, String season, String region) {
+	public PlayerPosition(String name, String position, String tournament, String year, String region) {
 		this.position = Position.valueOf(position);
 		this.name = name;
-		this.season = season;
+		this.tournament = tournament;
+		this.year = year;
 		this.region = region;
 	}
 
-	public PlayerPosition(String name, String position, String season, String region, String gameId) {
+	public PlayerPosition(String name, String position, String tournament, String year, String region, String gameId) {
 		this.name = name;
 		this.position = Position.valueOf(position);
-		this.season = season;
+		this.tournament = tournament;
+		this.year = year;
 		this.region = region;
 		this.gameId = gameId;
 	}
 
-	public String getSeason() {
-		return season;
+	
+
+	public String getTournament() {
+		return tournament;
 	}
 
-	public void setSeason(String season) {
-		this.season = season;
+	public void setTournament(String tournament) {
+		this.tournament = tournament;
+	}
+
+	public String getYear() {
+		return year;
+	}
+
+	public void setYear(String year) {
+		this.year = year;
 	}
 
 	public String getRegion() {

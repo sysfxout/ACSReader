@@ -15,13 +15,13 @@ public class Player {
 
 	private double adScore, dkScore, eSportsScore;
 
-	public Player(Participant participant, String season, String region, String gameId) {
+	public Player(Participant participant, String tournament, String year, String region, String gameId) {
 
 		ImportedStats stats = participant.getStats();
 		name = participant.getName();
 		championId = participant.getChampionId();
 		championName = ChampionMap.getChampionName(championId);
-		position = PlayerPositionMap.getPlayerPosition(name, season, region, gameId).toString();
+		position = PlayerPositionMap.getPlayerPosition(name, tournament, year, region, gameId).toString();
 		team = participant.getTeam();
 		opp = participant.getOpp();
 		if (stats.isWin())
@@ -116,5 +116,7 @@ public class Player {
 				+ position + ", team=" + team + ", opp=" + opp + ", result=" + result + ", adScore=" + adScore
 				+ ", dkScore=" + dkScore + ", eSportsScore=" + eSportsScore + "]";
 	}
+
+	
 
 }

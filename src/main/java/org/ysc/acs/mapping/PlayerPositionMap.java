@@ -81,7 +81,7 @@ public class PlayerPositionMap {
 	private static Function<String, PlayerPosition> mapBaseToPlayerPosition = (line) -> {
 		String[] parsedFilename = workingFilename.split("-");
 		String[] s = line.split(",");
-		return new PlayerPosition(s[0], s[1], parsedFilename[0], parsedFilename[1]);
+		return new PlayerPosition(s[0], s[1], parsedFilename[0], parsedFilename[1], parsedFilename[2]);
 	};
 
 	private static Function<String, PlayerPosition> mapSpecialToPlayerPosition = (line) -> {
@@ -89,20 +89,20 @@ public class PlayerPositionMap {
 		return new PlayerPosition(s[0], s[1], s[2], s[3], s[4]);
 	};
 
-	public static Position getPlayerPosition(String name, String season, String region, String gameId) {
+	public static Position getPlayerPosition(String name, String tournament, String year, String region, String gameId) {
 		if (gameId != null && !gameId.equals(""))
 			for (PlayerPosition playerPosition : specialCasePositionList) {
-				if (playerPosition.getName().equalsIgnoreCase(name) && playerPosition.getSeason().equals(season)
+				if (playerPosition.getName().equalsIgnoreCase(name) && playerPosition.getTournament().equals(tournament)
 						&& playerPosition.getRegion().equals(region) && playerPosition.getGameId().equals(gameId))
 					return playerPosition.getPosition();
 			}
 		for (PlayerPosition playerPosition : basePositionList) {
 			try {
-				if (playerPosition.getName().equalsIgnoreCase(name) && playerPosition.getSeason().equals(season)
+				if (playerPosition.getName().equalsIgnoreCase(name) && playerPosition.getTournament().equals(tournament)
 						&& playerPosition.getRegion().equals(region))
 							return playerPosition.getPosition();
 			} catch (NullPointerException e) {
-				System.err.println(name+", "+season+", "+region+", "+gameId);
+				System.err.println(name+", "+tournament+", "+region+", "+gameId);
 			}
 		}
 		return null;

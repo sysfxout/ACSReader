@@ -25,11 +25,12 @@ public class ACSReaderTest {
 		
 		String testFile = "src/test/testJson.json";
 		String gameId = "W1D1G1";
-		String season = "SPR16";
+		String tournament = "SPR";
+		String year = "16";
 		String region = "NA";
 
 		try {
-			ACSReader reader = new ACSReader(new FileReader(testFile), season, region, gameId);
+			ACSReader reader = new ACSReader(new FileReader(testFile), tournament, year, region, gameId);
 			players = reader.getPlayers();
 
 		} catch (FileNotFoundException e) {
